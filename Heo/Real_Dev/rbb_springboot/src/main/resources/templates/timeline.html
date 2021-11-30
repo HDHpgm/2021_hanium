@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="/fragment/layout">
+
+    <head>
+        <title>ROBOBO Management - Timeline Service</title>
+        <link th:href="@{/css/timeline.css}" rel="stylesheet">
+
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    </head>
+
+    <!-- Begin Page Content -->
+    <div layout:fragment="content" class="container-fluid">
+        <script th:src="@{/js/timeline.js}"></script>
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">타임라인</h1>
+        </div>
+
+        <div class="row" style="border: dotted; border-radius: 10px;background-color: aliceblue;">
+
+            <div class="wrap">
+                <div class="header">
+                    <p></p>
+                    <h2 >Timeline Service</h2>
+                    <p>
+                        공유할 작업내역을 입력해주세요.
+                    </p>
+                </div>
+                <div class="area-write mb-5">
+                <textarea class="field" placeholder="공유할 작업내역을 입력해주세요" name="contents" id="contents" cols="30"
+                          rows="10"></textarea>
+                    <!--            <button class="btn btn-danger" onclick="writePost()">작성하기</button>-->
+                    <img src="img/send.png" alt="" onclick="writePost()">
+                </div>
+                <div id="cards-box" class="area-read">
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container-fluid -->
+
+</html>

@@ -1,0 +1,313 @@
+[
+    {
+        "id": "4e59f461.a56f0c",
+        "type": "tab",
+        "label": "플로우 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "d243c665.c31f28",
+        "type": "debug",
+        "z": "4e59f461.a56f0c",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 260,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "c62c93a8.af08d",
+        "type": "function",
+        "z": "4e59f461.a56f0c",
+        "name": "Split_sensor_value",
+        "func": "global.set(\"area\",\"OFFICE 1204\"); \n\nvar output = msg.payload.split(\",\");\n\nvar msgList = [];\noutput.forEach(function(v, index)\n{\n    var msgIoT = {payload: parseFloat(v)};\n    msgList.push(msgIoT);\n});\n\nreturn msgList;",
+        "outputs": 5,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 460,
+        "wires": [
+            [
+                "8558ec5fe1d37b79"
+            ],
+            [
+                "cb20fcfaac055a25"
+            ],
+            [
+                "bc2080da51a48785"
+            ],
+            [
+                "fdec64a4299d92b1"
+            ],
+            [
+                "ec30ecac3bbe10c2"
+            ]
+        ]
+    },
+    {
+        "id": "5325fecc.91cdc",
+        "type": "mongodb out",
+        "z": "4e59f461.a56f0c",
+        "mongodb": "b7e19d0a52dd9661",
+        "name": "",
+        "collection": "records",
+        "payonly": false,
+        "upsert": false,
+        "multi": false,
+        "operation": "insert",
+        "x": 1220,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "63af438.5058bbc",
+        "type": "serial in",
+        "z": "4e59f461.a56f0c",
+        "name": "",
+        "serial": "78538cb2d3f6472f",
+        "x": 70,
+        "y": 300,
+        "wires": [
+            [
+                "c62c93a8.af08d",
+                "d243c665.c31f28"
+            ]
+        ]
+    },
+    {
+        "id": "8558ec5fe1d37b79",
+        "type": "function",
+        "z": "4e59f461.a56f0c",
+        "name": "Flex_1_val",
+        "func": "\nvar d = new Date();\nvar date = d.getFullYear() + '-' + d.getMonth() + '-' \n        + d.getDate() + '-' + d.getHours() + ':' + d.getMinutes()\n        + ':' + d.getSeconds();\n\nvar newMsg = {\n                payload: {\n                    'sensor': 'flex1',\n                    'date' : date,                    \n                    'value': msg.payload\n                }\n            };\n\nreturn newMsg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 260,
+        "wires": [
+            [
+                "5325fecc.91cdc",
+                "2782b478ebf59bc9"
+            ]
+        ]
+    },
+    {
+        "id": "cb20fcfaac055a25",
+        "type": "function",
+        "z": "4e59f461.a56f0c",
+        "name": "Flex_2_val",
+        "func": "\nvar d = new Date();\nvar date = d.getFullYear() + '-' + d.getMonth() + '-' \n        + d.getDate() + '-' + d.getHours() + ':' + d.getMinutes()\n        + ':' + d.getSeconds();\n\nvar newMsg = {\n                payload: {\n                    'sensor': 'flex2',\n                    'date' : date,                    \n                    'value': msg.payload\n                }\n            };\n\nreturn newMsg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 340,
+        "wires": [
+            [
+                "5325fecc.91cdc",
+                "39919a9987fd18cd"
+            ]
+        ]
+    },
+    {
+        "id": "bc2080da51a48785",
+        "type": "function",
+        "z": "4e59f461.a56f0c",
+        "name": "Flex_3_val",
+        "func": "\nvar d = new Date();\nvar date = d.getFullYear() + '-' + d.getMonth() + '-' \n        + d.getDate() + '-' + d.getHours() + ':' + d.getMinutes()\n        + ':' + d.getSeconds();\n\nvar newMsg = {\n                payload: {\n                    'sensor': 'flex3',\n                    'date' : date,                    \n                    'value': msg.payload\n                }\n            };\n\nreturn newMsg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 400,
+        "wires": [
+            [
+                "5325fecc.91cdc",
+                "6c0270654b2164be"
+            ]
+        ]
+    },
+    {
+        "id": "fdec64a4299d92b1",
+        "type": "function",
+        "z": "4e59f461.a56f0c",
+        "name": "Flex_4_val",
+        "func": "\nvar d = new Date();\nvar date = d.getFullYear() + '-' + d.getMonth() + '-' \n        + d.getDate() + '-' + d.getHours() + ':' + d.getMinutes()\n        + ':' + d.getSeconds();\n\nvar newMsg = {\n                payload: {\n                    'sensor': 'flex4',\n                    'date' : date,                    \n                    'value': msg.payload\n                }\n            };\n\nreturn newMsg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 480,
+        "wires": [
+            [
+                "5325fecc.91cdc",
+                "b32e5584a0bcf9ee"
+            ]
+        ]
+    },
+    {
+        "id": "ec30ecac3bbe10c2",
+        "type": "function",
+        "z": "4e59f461.a56f0c",
+        "name": "Flex_5_val",
+        "func": "\nvar d = new Date();\nvar date = d.getFullYear() + '-' + d.getMonth() + '-' \n        + d.getDate() + '-' + d.getHours() + ':' + d.getMinutes()\n        + ':' + d.getSeconds();\n\nvar newMsg = {\n                payload: {\n                    'sensor': 'flex5',\n                    'date' : date,                    \n                    'value': msg.payload\n                }\n            };\n\nreturn newMsg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 650,
+        "y": 580,
+        "wires": [
+            [
+                "5325fecc.91cdc",
+                "9bd41b99227055e1"
+            ]
+        ]
+    },
+    {
+        "id": "2782b478ebf59bc9",
+        "type": "ui_text",
+        "z": "4e59f461.a56f0c",
+        "group": "2b0b67e5.8c6878",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "text",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 790,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "39919a9987fd18cd",
+        "type": "ui_text",
+        "z": "4e59f461.a56f0c",
+        "group": "2b0b67e5.8c6878",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "text",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 790,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "6c0270654b2164be",
+        "type": "ui_text",
+        "z": "4e59f461.a56f0c",
+        "group": "2b0b67e5.8c6878",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "text",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 790,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "b32e5584a0bcf9ee",
+        "type": "ui_text",
+        "z": "4e59f461.a56f0c",
+        "group": "2b0b67e5.8c6878",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "text",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 790,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "9bd41b99227055e1",
+        "type": "ui_text",
+        "z": "4e59f461.a56f0c",
+        "group": "2b0b67e5.8c6878",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "text",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 790,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "b7e19d0a52dd9661",
+        "type": "mongodb",
+        "hostname": "127.0.0.1",
+        "topology": "direct",
+        "connectOptions": "",
+        "port": "27017",
+        "db": "sensor",
+        "name": ""
+    },
+    {
+        "id": "78538cb2d3f6472f",
+        "type": "serial-port",
+        "serialport": "COM5",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "2b0b67e5.8c6878",
+        "type": "ui_group",
+        "name": "Group 1",
+        "tab": "ad2f4438.b053a8",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "ad2f4438.b053a8",
+        "type": "ui_tab",
+        "name": "Tab 1",
+        "icon": "dashboard",
+        "order": 1
+    }
+]

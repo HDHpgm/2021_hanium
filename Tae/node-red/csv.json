@@ -1,0 +1,152 @@
+[
+    {
+        "id": "6574bae069a2d490",
+        "type": "tab",
+        "label": "플로우 2",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "9c3cbc98b232c110",
+        "type": "debug",
+        "z": "6574bae069a2d490",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 420,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "2d9fb27ff18d2bf7",
+        "type": "function",
+        "z": "6574bae069a2d490",
+        "name": "",
+        "func": "global.set(\"area\",\"OFFICE 1204\"); \n\nvar lines = msg.payload.split(\",\");\nvar messages = [];\n\nfor (var i=0; i<lines.length; i++) {\n   //deep copy the orginal message to ensure we don't loose any other fields\n   var tmp = JSON.parse(JSON.stringify(msg));\n   messages.push(tmp);\n}\nreturn [messages];\n\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 400,
+        "y": 580,
+        "wires": [
+            [
+                "a882da44783a6f31",
+                "719c1a5d936857ea"
+            ]
+        ]
+    },
+    {
+        "id": "639ca1431393b02f",
+        "type": "serial in",
+        "z": "6574bae069a2d490",
+        "name": "",
+        "serial": "78538cb2d3f6472f",
+        "x": 230,
+        "y": 420,
+        "wires": [
+            [
+                "2d9fb27ff18d2bf7",
+                "9c3cbc98b232c110"
+            ]
+        ]
+    },
+    {
+        "id": "575fcfa4667b7585",
+        "type": "file",
+        "z": "6574bae069a2d490",
+        "name": "hi",
+        "filename": "C:\\Users\\태정\\flex_value.csv",
+        "appendNewline": true,
+        "createDir": false,
+        "overwriteFile": "false",
+        "encoding": "none",
+        "x": 910,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a882da44783a6f31",
+        "type": "csv",
+        "z": "6574bae069a2d490",
+        "name": "",
+        "sep": ",",
+        "hdrin": false,
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\r\\n",
+        "temp": "flex1,flex2,flex3,flex4,flex5",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": false,
+        "include_null_values": false,
+        "x": 670,
+        "y": 580,
+        "wires": [
+            [
+                "575fcfa4667b7585"
+            ]
+        ]
+    },
+    {
+        "id": "719c1a5d936857ea",
+        "type": "ui_text",
+        "z": "6574bae069a2d490",
+        "group": "2b0b67e5.8c6878",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "text",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 660,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "78538cb2d3f6472f",
+        "type": "serial-port",
+        "serialport": "COM5",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "2b0b67e5.8c6878",
+        "type": "ui_group",
+        "name": "Group 1",
+        "tab": "ad2f4438.b053a8",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "ad2f4438.b053a8",
+        "type": "ui_tab",
+        "name": "Tab 1",
+        "icon": "dashboard",
+        "order": 1
+    }
+]

@@ -1,0 +1,1 @@
+# 센서값을 node-red를 이용하여 MongoDB 혹은 csv 형태로 저장

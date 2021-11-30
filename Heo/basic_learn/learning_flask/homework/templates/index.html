@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>스파르타코딩클럽 | 원페이지 쇼핑몰</title>
+    <meta property="og:title" content="DH 원페이지 쇼핑몰" />
+    <meta property="og:description" content="모니터 사고싶다" />
+    <meta property="og:image" content="{{ url_for('static', filename='ogimage.jpg') }}" />
+    <link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Sunflower', sans-serif;
+        }
+
+        .wrap {
+            width: 500px;
+            margin: 50px auto 0px auto;
+        }
+
+        .sell-image {
+            background-image: url("http://img.danawa.com/prod_img/500000/542/646/img/11646542_1.jpg?shrink=360:360&_v=20201006110933");
+            background-size: cover;
+            background-position: center;
+            width: 500px;
+            height: 400px;
+            margin: auto auto 30px auto;
+        }
+
+        .inline {
+            display: inline;
+        }
+
+        .bottom-margin {
+            margin-bottom: 30px;
+        }
+
+        .mybtn {
+            margin: auto;
+            display: block;
+        }
+        .rate-color {
+            color: blue;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: "http://spartacodingclub.shop/sparta_api/rate",
+                data: {},
+                success: function (response) {
+                    let rate = response['rate'];
+                    let temp_html = `<span class="rate-color">달러-원 환율:${rate}</span>`;
+                    $('#rate').append(temp_html);
+                }
+            })
+
+            listing();
+        });
+
+        function order() {
+            let name = $('#name').val()
+            let count = $('#count').val()
+            let addr = $('#addr').val()
+            let tel = $('#tel').val()
+            $.ajax({
+                type: "POST",
+                url: "/order",
+                data: {
+                    name_give: name,
+                    count_give: count,
+                    addr_give: addr,
+                    tel_give: tel
+                },
+                success: function (response) { // 성공하면
+                    alert(response["msg"]);
+                    window.location.reload();
+                }
+            })
+        }
+
+        function listing() {
+            $.ajax({
+                type: "GET",
+                url: "/order",
+                data: {},
+                success: function (response) {
+                    let orders = response['all_orders'];
+                    for (let i = 0; i < orders.length; i++) {
+                        let name = orders[i]['name'];
+                        let count = orders[i]['count'];
+                        let addr = orders[i]['addr'];
+                        let tel = orders[i]['tel'];
+
+                        let temp_html = `<tr>
+                                            <th scope="row">${name}</th>
+                                            <td>${count}</td>
+                                            <td>${addr}</td>
+                                            <td>${tel}</td>
+                                        </tr>`;
+                        $('#order-list').append(temp_html);
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+
+<body>
+    <div class="wrap">
+        <!-- 이미지 div -->
+        <div class="sell-image">
+        </div>
+
+        <!-- 상품과 소개 -->
+        <div class="bottom-margin">
+            <h1 class="inline">모니터를 팝니다 </h1>
+            <span>가격: 150,000원/개</span>
+            <br/>
+            <span>이 모니터 사서 듀얼모니터로 사용하고싶으신분 있나요? 저는 그렇게 사용하고 싶어요 아무말이나 적었습니다.</span>
+        </div>
+
+        <!-- 환율 div -->
+        <div id="rate" class="bottom-margin">
+        </div>
+
+        <!-- input 박스들을 전체 감싼 div-->
+        <div class="bottom-margin">
+            <!-- 주문자 이름 -->
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">주문자 이름</span>
+                </div>
+                <input id="name" type="text" class="form-control" aria-describedby="basic-addon1">
+            </div>
+
+            <!-- 수량 -->
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <label class="input-group-text">수량</label>
+                </div>
+                <select class="custom-select" id="count">
+                    <option selected>-- 수량을 선택하세요 --</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </div>
+
+            <!-- 주소 -->
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">주소</span>
+                </div>
+                <input id="addr" type="text" class="form-control" aria-describedby="basic-addon1">
+            </div>
+
+            <!-- 전화번호 -->
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">전화번호</span>
+                </div>
+                <input id="tel" type="text" class="form-control" aria-describedby="basic-addon1">
+            </div>
+
+            <button onclick="order()" type="submit" class="btn btn-primary mybtn">주문하기</button>
+        </div>
+        <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">이름</th>
+                <th scope="col">수량</th>
+                <th scope="col">주소</th>
+                <th scope="col">전화번호</th>
+            </tr>
+        </thead>
+        <tbody id="order-list">
+
+        </tbody>
+    </table>
+
+    </div>
+
+
+</body>
+
+</html>

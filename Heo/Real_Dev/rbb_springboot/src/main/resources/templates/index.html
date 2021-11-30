@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="/fragment/layout">
+<head>
+    <title>ROBOBO Management</title>
+    <link th:href="@{/css/timeline.css}" rel="stylesheet">
+    <script th:src="@{/js/index.js}"></script>
+    <link th:href="@{/css/indexmain.css}" rel="stylesheet">
+    <link th:href="@{/css/indexmenu.css}" rel="stylesheet">
+
+    <!-- Begin Page Content -->
+    <div layout:fragment="content" class="container-fluid">
+
+        <!-- 페이지 내용 헤드 -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h2 mb-0 text-gray-800">주요 서비스</h1>
+        </div>
+
+        <!-- Content Row -->
+        <div class="container">
+            <div class="card border-left-info" style="background: white;">
+                <div class="home_center_content">
+                    <div class="box1" id="tab">
+                        <div class="center_text">
+                            <div class="big_title">실시간 <span>스트리밍</span> 서비스</div>
+                            <p>로보보와 연결되면 카메라를 통해 실시간으로 영상을 보며 작업할 수 있습니다.</p>
+                            <p>사용자 인증 후 위의 연결하기 버튼을 클릭하면 컨트롤러와 연결을 시작합니다.</p>
+                            <p>작은 화면의 미리보기가 제공되지만, 큰 화면을 원한다면 왼쪽메뉴를 이용하세요</p>
+                        </div>
+                        <div class="right_img"><iframe width="360" height="270" src="http://192.168.0.8:5000/"></iframe></div>
+                    </div>
+                    <div class="box1" id="tab1">
+                        <div class="center_text">
+                            <div class="big_title">실시간 <span>스트리밍</span> 서비스</div>
+                            <p>로보보와 연결되면 카메라를 통해 실시간으로 영상을 보며 작업할 수 있습니다.</p>
+                            <p>사용자 인증 후 위의 연결하기 버튼을 클릭하면 컨트롤러와 연결을 시작합니다.</p>
+                            <p>작은 화면의 미리보기가 제공되지만, 큰 화면을 원한다면 왼쪽메뉴를 이용하세요</p>
+                        </div>
+                        <div class="right_img"><iframe width="360" height="270" src="http://192.168.0.8:5000/"></iframe></div>
+                    </div>
+                    <div class="box1" id="tab2">
+                        <div class="center_text">
+                            <div class="big_title"><span>타임라인</span> 서비스</div>
+                            <p>로보보 사용 후, 속한 조직에서 서로 공유할 작업내역이 있다면?</p>
+                            <p>작업한 내역, 전달할 내용을 자유롭게 작성하고 공유해보세요</p>
+                        </div>
+                        <div class="right_img"><img th:width="360" th:height="270" th:src="@{img/timeline.png}"></div>
+                    </div>
+                    <div class="box1" id="tab3">
+                        <div class="center_text">
+                            <div class="big_title"><span>채팅</span> 서비스</div>
+                            <p>연락이 닿지 않을때, 작업에 열중하고 있는 상대방에게 메시지를 보내보세요</p>
+                            <p>1:1 채팅을 제공합니다.</p>
+                        </div>
+                        <div class="right_img"><img th:width="360" th:height="270" th:src="@{img/chat.png}"></div>
+                    </div>
+                    <ul class="center_button_icons tabset mt-5">
+                        <li id="icon1" class="mr-3"><a href="#tab1" class="tab"> <img style="width: 90px; height: 90px;"
+                                                                                      th:src="@{/img/icon_streaming.png}"
+                        ></a></li>
+                        <li id="icon2" class="mr-3"><a href="#tab2" class="tab"> <img style="width: 90px; height: 90px;"
+                                                                                      th:src="@{/img/icon_timeline.png}"
+                        ></a></li>
+                        <li id="icon3"><a href="#tab3" class="tab"> <img style="width: 100px; height: 100px;"
+                                                                         th:src="@{/img/icon_chat.png}"
+                        ></a></li>
+                        <li><a href="#tab" class="tab active"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h2 mb-0 text-gray-800">한눈에 보기</h1>
+            </div>
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-primary shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                            ROBOBO 연결하기
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                            <button onclick="onclickPower1()" type="button"
+                                                    class="btn btn-primary mt-3"
+                                                    id="power-btn1">연결1
+                                            </button>
+                                            <button onclick="onclickPower2()" type="button"
+                                                    class="btn btn-primary mt-3"
+                                                    id="power-btn2">연결2
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6 mb-4">
+                        <div class="card border-left-success shadow h-100 py-2">
+                            <div class="card-body">
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col mr-2">
+                                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                            오늘의 작업내역 업데이트 개수(타임라인)
+                                        </div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800" id="timeline-num"><p>0</p></div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="main-timeline">
+                            <div class="timeline">
+                                <div class="timeline-icon"></div>
+                                <div class="timeline-content">
+                                    <span class="date">타임라인 최근 작업내역</span>
+                                    <div id="cards-box" class="area-read mr-3">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="timeline">
+                                <div class="timeline-icon"></div>
+                                <div class="timeline-content right">
+                                    <span class="date">대기</span>
+                                    <h4 class="title">Web Development</h4>
+                                    <p class="description">
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam vitae eleifend
+                                        ex. Praesent magna justo, bibendum id ante ut, vulputate tincidunt ipsum.
+                                        Curabitur at rhoncus sem, eu feugiat sapien. Duis in libero cursus, dapibus sem
+                                        ac, ornare mauris. Cras nunc lectus, porta quis metus vestibulum, pellentesque
+                                        gravida erat.
+                                    </p>
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" >
+            <div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+    <!-- /.container-fluid -->
+
+
+</html>

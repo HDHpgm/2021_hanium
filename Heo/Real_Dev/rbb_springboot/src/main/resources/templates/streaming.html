@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="/fragment/layout">
+    <head>
+        <title>ROBOBO Management - Streaming Service</title>
+    </head>
+    <!-- 스트리밍 -->
+    <div layout:fragment="content" class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">영상 스트리밍</h1>
+        </div>
+
+        <!-- Content Row -->
+        <div class="row">
+            <iframe width="1024" height="768"
+                    src="http://192.168.0.8:5000/">
+            </iframe>
+        </div>
+
+    </div>
+    <!-- 끝 -->
+
+
+</html>
